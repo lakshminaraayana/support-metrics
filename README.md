@@ -25,3 +25,17 @@ Steps to run the app:
 5. Open a new terminal window (#2) and run the command "curl http://localhost:9998/process/input.json"
 6. In the initial terminal window (#1), the result of the analyzing the cases will be seen.
     1. For example: [Metrics for Runtime team: [{"hours":25,"case_id":100},{"hours":0,"case_id":101}]
+    
+ Scenarios Tested:
+ 1. Pass a valid JSON file and assert the right hours were calculated for a single case.
+ 2. Pass a valid JSON file and assert the right hours were calculated for multiple cases
+ 3. Pass a valid JSON file and assert the right hours were calculated for multiple cases when the state is not in open at all.
+ 4. Pass a valid JSON file and assert the right hours were calculated for multiple cases when the team is not in runtime at all.
+ 5. Pass a valid JSON file and assert the right hours were calculated for multiple cases when the state is changed to open, to something else and then back to open.
+ 6. Pass a valid JSON file and assert the right hours were calculated for multiple cases when the team is changed to runtime, to something else and then back to runtime.
+ 7. Pass an invalid JSON file name and assert an error is thrown.
+ 8. Pass an invalid JSON format file and assert an error is thrown.
+ 9. Pass an empty and a null value of a file and assert an error is thrown.
+
+
+
