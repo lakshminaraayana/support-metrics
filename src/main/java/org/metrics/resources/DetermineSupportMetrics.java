@@ -23,7 +23,7 @@ public class DetermineSupportMetrics {
     @GET
     @Path("/{file}")
     @Produces("application/octet-stream")
-    public String processJSON(@PathParam("file") final String file) throws Exception {
+    public String processCases(@PathParam("file") final String file) throws Exception {
         if(file != null && !file.isEmpty()){
           new DetermineSupportMetrics().process(file);
           return "Success\n";           
@@ -87,15 +87,9 @@ public class DetermineSupportMetrics {
           }
           // Determine if the ends time needs to be determined (when state != open and team != runtime OR assignee has changed when team = runtime)
           else if(caseDetails.startTime != null && ((!caseDetails.state.equals("open") || !caseDetails.team.equals("Runtime")) || isAssigneeOnlyChange)){
-            caseDetails.endTime = timestamp;
-            // Format for the provided timestamp             
-            SimpleDateFormat utcFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-            Date start = utcFormat.parse(caseDetails.startTime);
-            Date end = utcFormat.parse(caseDetails.endTime);
-            // Determine the hours between startTime and endTime
-            int diff = (int)((end.getTime() - start.getTime()) / (1000 * 60 * 60));
+            caseDetails.endTime = timestamp;            
             // Increment the hours spent
-            caseDetails.hours += diff;
+            caseDetails.hours += calculateTimeDiff(caseDetails.startTime, caseDetails.endTime);
             // Set the endtime to starttime for upcoming case activities 
             if(isAssigneeOnlyChange){
               caseDetails.startTime = caseDetails.endTime;
@@ -110,7 +104,7 @@ public class DetermineSupportMetrics {
           item.put("hours", caseTrackingMap.get(caseId).hours);					
           array.put(item);					
         }
-        System.out.println("Final Result =" + array.toString());							
+        System.out.println("Metrics for Runtime team: " + array.toString());							
       } 
       catch (Exception e) {
         System.out.println(e);
@@ -118,11 +112,29 @@ public class DetermineSupportMetrics {
     }
     
     /**
+    * Calculates the time difference in hours for the provided times.
+    */
+    private static int calculateTimeDiff(String startTime, String endTime){
+      int diff = 0;
+      try {
+        // Format for the provided timestamp             
+        SimpleDateFormat utcFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        Date start = utcFormat.parse(startTime);
+        Date end = utcFormat.parse(endTime);
+        // Determine the hours between startTime and endTime
+        diff = (int)((end.getTime() - start.getTime()) / (1000 * 60 * 60));
+      } 
+      catch(Exception e) {        
+      }      
+      return diff;
+    }
+    
+    /**
     * Inner class to track the case details like the state, assignee, team, etc.
     */
     private class CaseDetails{
   		private String state;
-      private String assignee;
+        private String assignee;
   		private String team;
   		private String startTime;
   		private String endTime;
