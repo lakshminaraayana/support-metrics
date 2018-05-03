@@ -21,8 +21,13 @@ public class DetermineSupportMetrics {
     @Path("/{file}")
     @Produces("application/octet-stream")
     public String handleDownload(@PathParam("file") final String file) throws Exception {
-        new DetermineSupportMetrics().process(file);
-        return "Success\n";
+        if(file != null && !file.isEmpty()){
+          return "Error\n";
+        }
+        else{
+          new DetermineSupportMetrics().process(file);
+          return "Success\n";  
+        }        
     }
     
     public void process(String file){
