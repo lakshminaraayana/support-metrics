@@ -1,0 +1,7 @@
+[
+  {"case_id": 104, "state": {"from": null, "to": "close"}, "timestamp": "2017-01-13T06:00:00Z"},
+  {"case_id": 104, "assignee": "Otter", "team": "Support", "timestamp": "2017-01-13T13:00:00Z"},
+  {"case_id": 104, "assignee": "Rabbit", "team": "Runtime", "timestamp": "2017-01-13T15:00:00Z"},
+  {"case_id": 104, "assignee": "Badger", "team": "Runtime", "timestamp": "2017-01-15T08:00:00Z"},
+  {"case_id": 104, "assignee": "Otter", "team": "Support", "timestamp": "2017-01-15T12:00:00Z"}
+]
