@@ -25,11 +25,11 @@ public class DetermineSupportMetrics {
     @Produces("application/octet-stream")
     public String processJSON(@PathParam("file") final String file) throws Exception {
         if(file != null && !file.isEmpty()){
-          return "Error\n";
+          new DetermineSupportMetrics().process(file);
+          return "Success\n";           
         }
         else{
-          new DetermineSupportMetrics().process(file);
-          return "Success\n";  
+           return "Error\n";
         }        
     }
     
