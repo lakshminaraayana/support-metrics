@@ -1,0 +1,5 @@
+[
+  {"case_id": 104, "state": {"from": null, "to": "open"}, "timestamp": "2017-01-13T06:00:00Z"},
+  {"case_id": 104, "assignee": "Otter", "team": "Support", "timestamp": "2017-01-13T13:00:00Z"},
+  {"case_id": 104, "assignee": "Badger", "team": "Support", "timestamp": "2017-01-15T12:00:00Z"}
+]
