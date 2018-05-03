@@ -104,7 +104,9 @@ public class DetermineSupportMetrics {
           item.put("hours", caseTrackingMap.get(caseId).hours);					
           array.put(item);					
         }
+        System.out.println("********************************************************************************");
         System.out.println("Metrics for Runtime team: " + array.toString());							
+        System.out.println("********************************************************************************");
       } 
       catch (Exception e) {
         System.out.println(e);
