@@ -6,10 +6,11 @@ Basic Logic:
 3. Have a Map to track the each case (keyed by case_id and valued by time/hours)
 4. Begin tracking a case only If state == open or team == Runtime.
     1. If string contains ”state”, check if the “to” is “open”
-    2. If string contains ”state”, check if the “from” contains “open”,  if so  stop tracking
+    2. If string contains ”state”, check if the “to” changes from “open”,  if so stop tracking
     3. If string contains ”assignee”, check if the “team” is “Runtime”
         1. If string contains ”assignee”, check if the “team” changes from “Runtime”
-5. When both conditions are true start incrementing the time/hours until either the state or the team changes
+        1. If team is "Runtime" then check if the ”assignee” changes.
+5. When the above conditions are true start incrementing the time/hours until either the state or the team changes or assignee changes for the runtime team.
 6. Build a JSON string with the the case_id from the map and their values.
 
 Steps to run the app:
