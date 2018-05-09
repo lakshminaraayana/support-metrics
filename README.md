@@ -1,16 +1,3 @@
-Basic Logic:
-1. Validate that an input is provided to parse. If no input (empty / null) then return.
-2. Deserialize the provided JSON string.
-3. Have a Map to track the each case (keyed by case_id and valued by time/hours)
-4. Begin tracking a case only If state == open or team == Runtime.
-    1. If string contains ”state”, check if the “to” is “open”
-    2. If string contains ”state”, check if the “to” changes from “open”,  if so stop tracking
-    3. If string contains ”assignee”, check if the “team” is “Runtime”
-        1. If string contains ”assignee”, check if the “team” changes from “Runtime”
-        1. If team is "Runtime" then check if the ”assignee” changes.
-5. When the above conditions are true start incrementing the time/hours until either the state or the team changes or assignee changes for the runtime team.
-6. Build a JSON string with the the case_id from the map and their values.
-
 Steps to run the app:
 
 OPTION-1 (local)
@@ -33,6 +20,19 @@ OPTION-2 (heroku app)
    1. https://salty-shelf-26282.herokuapp.com/process/input1.json
    2. https://salty-shelf-26282.herokuapp.com/process/input2.json
    3. https://salty-shelf-26282.herokuapp.com/process/input3.json
+   
+Basic Logic:
+1. Validate that an input is provided to parse. If no input (empty / null) then return.
+2. Deserialize the provided JSON string.
+3. Have a Map to track the each case (keyed by case_id and valued by time/hours)
+4. Begin tracking a case only If state == open or team == Runtime.
+    1. If string contains ”state”, check if the “to” is “open”
+    2. If string contains ”state”, check if the “to” changes from “open”,  if so stop tracking
+    3. If string contains ”assignee”, check if the “team” is “Runtime”
+        1. If string contains ”assignee”, check if the “team” changes from “Runtime”
+        1. If team is "Runtime" then check if the ”assignee” changes.
+5. When the above conditions are true start incrementing the time/hours until either the state or the team changes or assignee changes for the runtime team.
+6. Build a JSON string with the the case_id from the map and their values.
 
  Scenarios Tested:
  1. Pass a valid JSON file and assert the right hours were calculated for a single case.
