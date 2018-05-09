@@ -105,8 +105,11 @@ public class DetermineSupportMetrics {
       }
       // Build string to display as a table
       StringBuilder sbuf = new StringBuilder();
+      // To track the time spent on the cases
       int mostTime = 0;
+      int mostTimeCaseId = 0;
       int leastTime = 0;
+      int leastTimeCaseId = 0;
       Formatter fmt = new Formatter(sbuf);        
       sbuf.append("<PRE>");
       sbuf.append("Metrics for Runtime team\n\n");
@@ -123,11 +126,15 @@ public class DetermineSupportMetrics {
         // Determine most time, and lease time spent on a case
         if(mostTime == 0 && leastTime == 0){
           mostTime = hours;
+          mostTimeCaseId = caseId;
           leastTime = hours;
+          leastTimeCaseId = caseId;
         }
         else{
           mostTime = hours > mostTime ? hours : mostTime;
           leastTime = hours < leastTime ? hours : leastTime;
+          mostTimeCaseId = hours > mostTime ? caseId : mostTimeCaseId;
+          leastTimeCaseId = hours < leastTime ? caseId : leastTimeCaseId;
         }
         // Build string to display as a table
         fmt.format("%s          %s", caseId, caseTrackingMap.get(caseId).hours);          
@@ -137,9 +144,9 @@ public class DetermineSupportMetrics {
       sbuf.append("\n\n\n\n");
       sbuf.append("Raw JSON Data: " + array.toString());
       sbuf.append("\n\n");
-      sbuf.append("Most time spent on a case: " + mostTime);
-      sbuf.append("\n");
-      sbuf.append("Lease time spent on a case: " + leastTime);    
+      sbuf.append("Most time was spent by the team on case with Id: " + mostTimeCaseId + " Time: " + mostTime);
+      sbuf.append("\n");  
+      sbuf.append("Least time was spent by the team on case with Id: " + leastTimeCaseId + " Time: " + leastTime);
       sbuf.append("</PRE>");
       sbuf.append("\n\n");
       return sbuf.toString();
