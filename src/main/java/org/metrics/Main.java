@@ -14,6 +14,6 @@ public class Main {
         initParams.put("com.sun.jersey.config.property.packages","org.metrics.resources");
         System.out.println("Starting grizzly...");
         SelectorThread threadSelector = GrizzlyWebContainerFactory.create(baseUri, initParams);
-        System.out.println(String.format("Jersey service startedß at %sapplication.wadl.",baseUri, baseUri));
+        System.out.println(String.format("Jersey service started at %sapplication.wadl.",baseUri, baseUri));
     }
 }
