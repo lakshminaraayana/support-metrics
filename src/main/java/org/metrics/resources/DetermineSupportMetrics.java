@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.apache.commons.io.FileUtils;
+import java.util.Formatter;
 
 /**
 * Analyzes the data in the JSON file and determines the time spent on each cases by the runtime team.
@@ -22,11 +23,12 @@ import org.apache.commons.io.FileUtils;
 public class DetermineSupportMetrics {
     @GET
     @Path("/{file}")
-    @Produces("application/octet-stream")
+    //@Produces("application/octet-stream")
+    @Produces(MediaType.TEXT_HTML)
     public String processCases(@PathParam("file") final String file) throws Exception {
         if(file != null && !file.isEmpty()){
-          new DetermineSupportMetrics().process(file);
-          return "Success\n";           
+          String result = new DetermineSupportMetrics().process(file);
+          return result;           
         }
         else{
            return "Error\n";
@@ -37,7 +39,7 @@ public class DetermineSupportMetrics {
     * Processes the JSON in the provided file and determines the time spent on each case by
     * the runtime team when the state is open.
     */
-    public void process(String file){
+    public String process(String file){
       try {
         // Read the contents of the file
         String content = FileUtils.readFileToString(new File(file), "utf-8");        
@@ -96,20 +98,33 @@ public class DetermineSupportMetrics {
             }
           }									
         }
+        // Build string to display as a table
+        StringBuilder sbuf = new StringBuilder();
+        Formatter fmt = new Formatter(sbuf);        
+        sbuf.append("<PRE>");
+        sbuf.append("Metrics for Runtime team\n\n");
+        sbuf.append("-------------------------\n");
+        fmt.format("%s       %s", "CaseId", "Hours\n");
+        sbuf.append("-------------------------\n");
         // Build the result JSON from the map
         JSONArray array = new JSONArray();
         for(int caseId : caseTrackingMap.keySet()){				
           JSONObject item = new JSONObject();
           item.put("case_id", caseId);
-          item.put("hours", caseTrackingMap.get(caseId).hours);					
+          item.put("hours", caseTrackingMap.get(caseId).hours);
+          // Build string to display as a table
+          fmt.format("%s          %s", caseId, caseTrackingMap.get(caseId).hours);          
+          sbuf.append("\n");					
           array.put(item);					
         }
-        System.out.println("********************************************************************************");
-        System.out.println("Metrics for Runtime team: " + array.toString());							
-        System.out.println("********************************************************************************");
+        sbuf.append("\n\n\n\n");
+        sbuf.append("Raw JSON Data: " + array.toString());                
+        sbuf.append("</PRE>");
+        return sbuf.toString();
       } 
       catch (Exception e) {
         System.out.println(e);
+        return e.getMessage();
       } 		
     }
     
