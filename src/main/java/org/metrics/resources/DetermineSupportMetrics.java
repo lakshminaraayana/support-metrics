@@ -125,6 +125,7 @@ public class DetermineSupportMetrics {
       sbuf.append("\n\n\n\n");
       sbuf.append("Raw JSON Data: " + array.toString());                
       sbuf.append("</PRE>");
+      sbuf.append("\n\n");
       return sbuf.toString();
     } 
     catch (Exception e) {
