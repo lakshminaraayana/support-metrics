@@ -14,6 +14,7 @@ Basic Logic:
 6. Build a JSON string with the the case_id from the map and their values.
 
 Steps to run the app:
+OPTION-1 (local)
 1. Download the folder in Zip format (support-metrics-master.zip), unzip the contents in to a folder (support-metrics-master).
 2. Open a terminal window (#1) and go to the unzipped folder location (for example: /Users/slakshminaraayana/Downloads/support-metrics-master)
 3. Run the command - "mvn package" to build the project. 
@@ -25,7 +26,15 @@ Steps to run the app:
 5. Open a new terminal window (#2) and run the command "curl http://localhost:9998/process/input.json"
 6. In the initial terminal window (#1), the result of the analyzing the cases will be seen.
     1. For example: [Metrics for Runtime team: [{"hours":25,"case_id":100},{"hours":0,"case_id":101}]
-    
+
+OPTION-2 (heroku app)
+1. The heroku app (https://salty-shelf-26282.herokuapp.com/) process the files and provides the results in the browser screen directly.
+2. The URL for the app needs to be appended with "/process/fileName", for example https://salty-shelf-26282.herokuapp.com/process/input.json will process the file input.json and the processed output will be presented on the screen.
+3. Other examples are :
+   1. https://salty-shelf-26282.herokuapp.com/process/input1.json
+   2. https://salty-shelf-26282.herokuapp.com/process/input2.json
+   3. https://salty-shelf-26282.herokuapp.com/process/input3.json
+
  Scenarios Tested:
  1. Pass a valid JSON file and assert the right hours were calculated for a single case.
  2. Pass a valid JSON file and assert the right hours were calculated for multiple cases
