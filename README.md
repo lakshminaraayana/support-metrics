@@ -1,5 +1,3 @@
-README.md
-
 Basic Logic:
 1. Validate that an input is provided to parse. If no input (empty / null) then return.
 2. Deserialize the provided JSON string.
@@ -14,6 +12,7 @@ Basic Logic:
 6. Build a JSON string with the the case_id from the map and their values.
 
 Steps to run the app:
+
 OPTION-1 (local)
 1. Download the folder in Zip format (support-metrics-master.zip), unzip the contents in to a folder (support-metrics-master).
 2. Open a terminal window (#1) and go to the unzipped folder location (for example: /Users/slakshminaraayana/Downloads/support-metrics-master)
@@ -21,7 +20,7 @@ OPTION-1 (local)
     1. Please install maven if it has not been installed.
     2. Ensure that a message "BUILD SUCCESS" is seen when the command is executed.
 4. Run the command - "sh target/bin/app" to start the web service
-    1. Ensure that a message "Jersey service startedß at http://localhost:9998/application.wadl." is seen when the command is executed.
+    1. Ensure that a message "Jersey service started at http://localhost:9998/application.wadl." is seen when the command is executed.
     2. Leave the terminal window as is, do not close it
 5. Open a new terminal window (#2) and run the command "curl http://localhost:9998/process/input.json"
 6. In the initial terminal window (#1), the result of the analyzing the cases will be seen.
