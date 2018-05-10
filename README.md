@@ -14,12 +14,14 @@ OPTION-1 (local)
     1. For example: [Metrics for Runtime team: [{"hours":25,"case_id":100},{"hours":0,"case_id":101}]
 
 OPTION-2 (heroku app)
-1. The heroku app (https://salty-shelf-26282.herokuapp.com/) process the files and provides the results in the browser screen directly.
-2. The URL for the app needs to be appended with "/process/fileName", for example https://salty-shelf-26282.herokuapp.com/process/input.json will process the file input.json and the processed output will be presented on the screen.
+1. The heroku app (https://salty-shelf-26282.herokuapp.com/) processes the file with the name provided in the URL and returns with the results in the browser screen directly.
+2. The URL for the app needs to be appended with "/process/fileName", for instance https://salty-shelf-26282.herokuapp.com/process/input.json will process the file input.json and the processed output will be presented on the screen.
 3. Other examples are :
    1. https://salty-shelf-26282.herokuapp.com/process/input1.json
    2. https://salty-shelf-26282.herokuapp.com/process/input2.json
    3. https://salty-shelf-26282.herokuapp.com/process/input3.json
+   4. https://salty-shelf-26282.herokuapp.com/process/input4.json
+   5. https://salty-shelf-26282.herokuapp.com/process/input5.json
    
 Basic Logic:
 1. Validate that an input is provided to parse. If no input (empty / null) then return.
