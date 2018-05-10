@@ -131,10 +131,14 @@ public class DetermineSupportMetrics {
           leastTimeCaseId = caseId;
         }
         else{
-          mostTime = hours > mostTime ? hours : mostTime;
-          leastTime = hours < leastTime ? hours : leastTime;
-          mostTimeCaseId = hours > mostTime ? caseId : mostTimeCaseId;
-          leastTimeCaseId = hours < leastTime ? caseId : leastTimeCaseId;
+          if(hours > mostTime){
+            mostTime = hours;
+            mostTimeCaseId = caseId;
+          }
+          if(hours < leastTime){
+            leastTime = hours;
+            leastTimeCaseId = caseId;
+          }
         }
         // Build string to display as a table
         fmt.format("%s          %s", caseId, caseTrackingMap.get(caseId).hours);          
@@ -144,9 +148,9 @@ public class DetermineSupportMetrics {
       sbuf.append("\n\n\n\n");
       sbuf.append("Raw JSON Data: " + array.toString());
       sbuf.append("\n\n");
-      sbuf.append("Most time was spent by the team on case with Id: " + mostTimeCaseId + " Time: " + mostTime);
+      sbuf.append("Most time spent by the team on Case: " + mostTimeCaseId + " , Time: " + mostTime);
       sbuf.append("\n");  
-      sbuf.append("Least time was spent by the team on case with Id: " + leastTimeCaseId + " Time: " + leastTime);
+      sbuf.append("Least time spent by the team on Case: " + leastTimeCaseId + ", Time: " + leastTime);
       sbuf.append("</PRE>");
       sbuf.append("\n\n");
       return sbuf.toString();
