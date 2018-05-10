@@ -148,9 +148,9 @@ public class DetermineSupportMetrics {
       sbuf.append("\n\n\n\n");
       sbuf.append("Raw JSON Data: " + array.toString());
       sbuf.append("\n\n");
-      sbuf.append("Most time spent by the team on Case: " + mostTimeCaseId + " , Time: " + mostTime);
+      sbuf.append("Most time spent by the team on Case: " + mostTimeCaseId + ", Time: " + mostTime +" hours");
       sbuf.append("\n");  
-      sbuf.append("Least time spent by the team on Case: " + leastTimeCaseId + ", Time: " + leastTime);
+      sbuf.append("Least time spent by the team on Case: " + leastTimeCaseId + ", Time: " + leastTime +" hours");
       sbuf.append("</PRE>");
       sbuf.append("\n\n");
       return sbuf.toString();
