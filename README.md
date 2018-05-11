@@ -35,6 +35,13 @@ Basic Logic:
         1. If team is "Runtime" then check if the ”assignee” changes.
 5. When the above conditions are true start incrementing the time/hours until either the state or the team changes or assignee changes for the runtime team.
 6. Build a JSON string with the the case_id from the map and their values.
+7. The process also supports mulitple batches, where a case is being tracked across multiple files then the app will keep track of the case and aggregates the final time for the case. For example, the below calls are tracking 2 cases across multiple files.
+      1. https://salty-shelf-26282.herokuapp.com/process/batch1.json
+      2. https://salty-shelf-26282.herokuapp.com/process/batch2.json
+In the second call we will see the aggregated result of the cases.
+8. The new GET /cases will provide the consolidated view of all the cases that have been processed so far.
+    1. https://salty-shelf-26282.herokuapp.com/cases
+
 
  Scenarios Tested:
  1. Pass a valid JSON file and assert the right hours were calculated for a single case.
