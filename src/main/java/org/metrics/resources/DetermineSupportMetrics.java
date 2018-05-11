@@ -21,10 +21,22 @@ import java.util.Formatter;
 */
 @Path("/")
 public class DetermineSupportMetrics {
+  
+  // Map to track the case and the time spent on it by the team
+  private static Map<Integer, CaseDetails> caseTrackingMap;
+  private static String allCasesResult = "";
+  
   @GET
   @Produces(MediaType.TEXT_HTML)
   public String start() throws Exception {
     return "Welcome to the Runtime team metrics app!" ;
+  }
+  
+  @GET
+  @Path("cases")
+  @Produces(MediaType.TEXT_HTML)
+  public String cases() throws Exception{
+    return allCasesResult;
   } 
   
   @GET
@@ -32,7 +44,11 @@ public class DetermineSupportMetrics {
   @Produces(MediaType.TEXT_HTML)
   public String processCases(@PathParam("file") final String file) throws Exception {
     if(file != null && !file.isEmpty()){
+      if(caseTrackingMap == null){
+        caseTrackingMap = new HashMap<Integer, CaseDetails>();
+      }
       String result = new DetermineSupportMetrics().process(file);
+      allCasesResult += result;
       return result;           
     }
     else{
@@ -48,10 +64,7 @@ public class DetermineSupportMetrics {
     try {
       // Read the contents of the file
       String content = FileUtils.readFileToString(new File(file), "utf-8");        
-      JSONArray jsonArray =  new JSONArray(content);
-      
-      // Map to track the case and the time spent on it by the team
-      Map<Integer, CaseDetails> caseTrackingMap = new HashMap<Integer, CaseDetails>();
+      JSONArray jsonArray =  new JSONArray(content);      
       
       // Iterate over the JSON input
       for(int i = 0 ; i < jsonArray.length(); i++){
